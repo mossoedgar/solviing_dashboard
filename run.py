@@ -1,2 +1,2 @@
 import os
-os.system('python app.py')
+os.system('python3 app.py')
