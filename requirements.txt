@@ -13,7 +13,6 @@ mysql
 mysql.connector
 pymysql
 sqlalchemy
-sys
 os
 webbrowser
 threading
