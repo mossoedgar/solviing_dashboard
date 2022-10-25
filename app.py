@@ -30,7 +30,7 @@ def init_dashboard(server):
     dash_app = dash.Dash(
         name='Dashboard',
         server=server,
-        routes_pathname_prefix='/dashapp/')
+        routes_pathname_prefix='/solviingDashboard/')
 
     dash_app.layout = html.Div(id = 'parent', children = [
                     html.H1(id = 'H1', 
