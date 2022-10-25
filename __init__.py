@@ -2,7 +2,7 @@
 from flask import Flask
 
 
-def init_app():
+def app():
     """Construct core Flask application."""
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object('config.Config')
@@ -12,3 +12,6 @@ def init_app():
         from . import routes
 
         return app
+
+    
+    
