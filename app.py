@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/root/flask-app")
+sys.path.append("/root/solviing_dashboard")
 
 import dash
 from dash import html
