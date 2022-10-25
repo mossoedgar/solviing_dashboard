@@ -1,7 +1,7 @@
 import sys,os
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(1, '/root/flask-app')
+sys.path.insert(1, '/root/solviing_dashboard')
 
 from flask import Flask
 
