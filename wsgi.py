@@ -1,5 +1,5 @@
-from app import app
+from app import app as application
 import server
 
 if __name__ == "__main__":
-    app.run_server(port=5000, debug = True)
+    application.run_server(port=5000, debug = True)
