@@ -1,5 +1,5 @@
 import sys, os
-sys.path.append("/root/flask-app/")
+sys.path.append("/root/solviing_dashboard/")
 import __init__
 from __init__ import init_app
 
