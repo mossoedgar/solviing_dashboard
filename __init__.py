@@ -1,5 +1,8 @@
 """Initialize Flask app."""
 from flask import Flask
+from waitress import serve
+from app import server
+
 
 
 def app():
@@ -15,3 +18,5 @@ def app():
 
     
     
+def server():
+    serve(server)
