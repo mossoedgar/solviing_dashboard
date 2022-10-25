@@ -435,9 +435,6 @@ def update_graph(dff_filtered):
 
         return fig
 
-@server.route("/dash")
-def my_dash_app():
-    return app.index()
 
 if __name__ == '__main__':
     Timer(1, open_browser).start()
