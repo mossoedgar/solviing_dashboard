@@ -438,4 +438,4 @@ def update_graph(dff_filtered):
 
 if __name__ == '__main__':
     Timer(1, open_browser).start()
-    app.run_server(host='143.244.186.216', port=port)
+    app.run_server(host='0.0.0.0', port=port)
