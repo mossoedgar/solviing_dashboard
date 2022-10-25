@@ -33,7 +33,7 @@ import webbrowser
 from threading import Timer
 
 
-port = 8050
+port = 5000
 
 def open_browser():
         webbrowser.open_new("http://localhost:{}".format(port))
