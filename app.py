@@ -32,7 +32,7 @@ def init_dashboard(server):
         server=server,
         routes_pathname_prefix='/solviingDashboard/')
     dash_app.title = 'Solviing'
-    dash_dash_appapp.layout = html.Div(id = 'parent', children = [
+    dash_app.layout = html.Div(id = 'parent', children = [
                     html.H1(id = 'H1', 
                             children = 'Dashboard de Vivienda en México', 
                             style = {'textAlign':'center',
