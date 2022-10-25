@@ -35,9 +35,9 @@ from threading import Timer
 
 port = 8050
 
-def open_browser():    
-	webbrowser.open_new("http://localhost:{}".format(port))
-    
+def open_browser():
+        webbrowser.open_new("http://localhost:{}".format(port))
+
 
 def find_data_file(filename):
     if getattr(sys, 'frozen', False):
@@ -64,7 +64,7 @@ def clean_treated_data(df):
         df = df[pd.to_numeric(df['clave_municipio'], errors='coerce').notnull()]
         #df = df.loc[df.SUPERFICIE_VENDIBLE.str.isnumeric()]
         df['clave_municipio'] = df['clave_municipio'].astype(int)
-    
+
     if 'valor_mun_total_promedio' in df.columns:
         df['valor_mun_total_promedio'] = df['valor_mun_total_promedio'].astype(float)
         df['valor_mun_total_promedio'] = df['valor_mun_total_promedio'].round(2)
@@ -72,7 +72,7 @@ def clean_treated_data(df):
     if 'valor_mun_m2_promedio' in df.columns:
         df['valor_mun_m2_promedio'] = df['valor_mun_m2_promedio'].astype(float)
         df['valor_mun_m2_promedio'] = df['valor_mun_m2_promedio'].round(2)
-    
+
     return df
 
 def cleanFigureData(df):
@@ -92,7 +92,7 @@ def cleanFigureData(df):
         df = df[pd.to_numeric(df['clave_municipio'], errors='coerce').notnull()]
         #df = df.loc[df.SUPERFICIE_VENDIBLE.str.isnumeric()]
         df['clave_municipio'] = df['clave_municipio'].astype(int)
-    
+
     if 'valor_mun_total_promedio' in df.columns:
         df['valor_mun_total_promedio'] = df['valor_mun_total_promedio'].astype(float)
         df['valor_mun_total_promedio'] = df['valor_mun_total_promedio'].round(2)
@@ -120,13 +120,13 @@ options_dict = df_test.groupby('entidad_federativa')['municipio'].agg(list).to_d
 
 ##############################################################################################################################
 
-app = dash.Dash(__name__, assets_folder=find_data_file('./assets/')) 
+app = dash.Dash(__name__, assets_folder=find_data_file('./assets/'))
 
 server = app.server
 
 app.layout = html.Div(id = 'parent', children = [
-                html.H1(id = 'H1', 
-                        children = 'Dashboard Demográfico de México', 
+                html.H1(id = 'H1',
+                        children = 'Dashboard Demográfico de México',
                         style = {'textAlign':'center',
                                 'marginTop':40,
                                 'marginBottom':40
@@ -149,12 +149,12 @@ app.layout = html.Div(id = 'parent', children = [
                             id = 'dropdown-municipio'
                             #options=[
                             #    {'label': i, 'value': i} for i in df.municipio.unique()
-                            #], 
-                            #multi=False, 
+                            #],
+                            #multi=False,
                             #placeholder='Filtro por municipio...'
                         )#,
                         #dcc.Store(id='dropdown-municipio')
-                    ], style={'width': '25%', 'float': 'right', 'display': 'inline-block'}) 
+                    ], style={'width': '25%', 'float': 'right', 'display': 'inline-block'})
                 ]),
                 html.Div([
                     dcc.Graph(id = 'valor-inmueble'),
@@ -193,7 +193,7 @@ def set_municipio_value(available_options):
 )
 
 def filter_df(estado, municipio):
-    
+
     #df = df_average_prices_complete
     #df = clean_treated_data(df)
     dff = df[(df['entidad_federativa'] == str(estado)) & (df['municipio'] == str(municipio))]
@@ -205,26 +205,26 @@ def filter_df(estado, municipio):
 
 
 @app.callback(Output(component_id='valor-inmueble', component_property= 'figure'),
-              Input(component_id='dff_filtered', component_property= 'data')              
+              Input(component_id='dff_filtered', component_property= 'data')
 )
 
 def update_graph(dff_filtered):
-    
+
     if dff_filtered is None:
-    
+
         raise PreventUpdate
-    
+
     else:
 
         dff = pd.read_json(dff_filtered, orient='split')
         dff = cleanFigureData(dff)
         dff['valor_mun_total_promedio_porcentaje'] = (dff['valor_mun_total_promedio'].pct_change())*100
         dff['valor_mun_total_promedio_porcentaje'] = dff['valor_mun_total_promedio_porcentaje'].round(2)
-        
+
         fig = go.Figure()
 
         fig.add_trace(go.Bar(
-            x=dff.fecha, 
+            x=dff.fecha,
             y=dff.valor_mun_total_promedio,
             text = dff.valor_mun_total_promedio,
             textposition = "auto",
@@ -239,7 +239,7 @@ def update_graph(dff_filtered):
         ))
 
         fig.add_trace(go.Scatter(
-            x = dff.fecha, 
+            x = dff.fecha,
             y = dff.valor_mun_total_promedio_porcentaje,
             mode="lines+markers+text",
             text = dff.valor_mun_total_promedio_porcentaje,
@@ -256,7 +256,7 @@ def update_graph(dff_filtered):
 
         # fig.update_layout(hovermode='x unified')
         fig.add_trace(go.Scatter(
-            x=dff.fecha, 
+            x=dff.fecha,
             y=dff.valor_mun_total_promedio,
             mode = 'lines',
             marker_color='black',
@@ -267,11 +267,11 @@ def update_graph(dff_filtered):
 
         fig.update_layout(
             # split the x-axis to fraction of plots in
-            # proportions  
+            # proportions
             xaxis=dict(
                     domain=[0.05, 0.95]
                 ),
-        
+
             # pass the y-axis title, titlefont, color
             # and tickfont as a dictionary and store
             # it an variable yaxis
@@ -284,7 +284,7 @@ def update_graph(dff_filtered):
                     color="#0000ff"
                 )
             ),
-            
+
             # pass the y-axis 2 title, titlefont, color and
             # tickfont as a dictionary and store it an
             # variable yaxis 2
@@ -326,11 +326,11 @@ def update_graph(dff_filtered):
 )
 
 def update_graph(dff_filtered):
-    
+
     if dff_filtered is None:
-    
+
         raise PreventUpdate
-    
+
     else:
 
         dff = pd.read_json(dff_filtered, orient='split')
@@ -341,7 +341,7 @@ def update_graph(dff_filtered):
         fig = go.Figure()
 
         fig.add_trace(go.Bar(
-            x=dff.fecha, 
+            x=dff.fecha,
             y=dff.valor_mun_m2_promedio,
             text = dff.valor_mun_m2_promedio,
             textposition = "auto",
@@ -356,7 +356,7 @@ def update_graph(dff_filtered):
         ))
 
         fig.add_trace(go.Scatter(
-            x = dff.fecha, 
+            x = dff.fecha,
             y = dff.valor_mun_m2_promedio_porcentaje,
             mode="lines+markers+text",
             text = dff.valor_mun_m2_promedio_porcentaje,
@@ -372,7 +372,7 @@ def update_graph(dff_filtered):
         ))
 
         fig.add_trace(go.Scatter(
-            x=dff.fecha, 
+            x=dff.fecha,
             y=dff.valor_mun_m2_promedio,
             mode = 'lines',
             marker_color='black',
@@ -384,7 +384,7 @@ def update_graph(dff_filtered):
 
         fig.update_layout(
             # split the x-axis to fraction of plots in
-            # proportions  
+            # proportions
             xaxis=dict(
                     domain=[0.05, 0.95]
                 ),
@@ -400,7 +400,7 @@ def update_graph(dff_filtered):
                     color="#0000ff"
                 )
             ),
-            
+
             # pass the y-axis 2 title, titlefont, color and
             # tickfont as a dictionary and store it an
             # variable yaxis 2

@@ -4,7 +4,7 @@ import pandas as pd
 import pymysql
 from mysql.connector import Error
 from sqlalchemy import create_engine
-import sqlalchemy.sql.default_comparator
+
 '''
 def connectToDatabase():
 
@@ -22,15 +22,16 @@ def connectToDatabase():
 
 def createNewTable(query):
 
-    host_name = 'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
     try:
         connection = mysql.connector.connect(host=host_name,
-        user='admin', 
-        password='s6I1H=)2.21a',
+        user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+        password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
         port = '3306',
-        database='Solviing_Prices')
-    except:
+        database = 'Solviing_Prices')
+    except Exception as e:
         print('Connection to DB failed.')
+        print(e)
 
     mycursor = connection.cursor()
     mycursor.execute(query)
@@ -38,14 +39,13 @@ def createNewTable(query):
     return
 
 def queryTable(query):
-
-    host_name = 'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
     try:
         conn = mysql.connector.connect(host=host_name,
-                                        user='admin', 
-                                        password='s6I1H=)2.21a',
+                                        user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+                                        password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
                                         port = '3306',
-                                        database='Solviing_Prices')
+                                        database = 'Solviing_Prices')
     except:
         print('Connection to DB failed.')
     
@@ -53,16 +53,16 @@ def queryTable(query):
     
     return df
 
-    #################################################
 
+def performQuery(query):
 
-    host_name = 'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
     try:
         connection = mysql.connector.connect(host=host_name,
-        user='admin', 
-        password='s6I1H=)2.21a',
-        port = '3306',
-        database='Solviing_Prices')
+                                             user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+                                             password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
+                                             port = '3306',
+                                            database = 'Solviing_Prices')
     except:
         print('Connection to DB failed.')
      
@@ -73,6 +73,7 @@ def queryTable(query):
         # get all records
         records = cursor.fetchall()
         #print("Total number of rows in table: ", cursor.rowcount)
+        return records
 
     except mysql.connector.Error as e:
         print("Error reading data from MySQL table", e)
@@ -82,18 +83,18 @@ def queryTable(query):
             connection.close()
             cursor.close()
             print("MySQL connection is closed")
-    return records
-
+    
+    return
 
 def deleteTable(table_name):
 
-    host_name = 'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
     try:
         connection = mysql.connector.connect(host=host_name,
-                                        user='admin', 
-                                        password='s6I1H=)2.21a',
+                                        user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+                                        password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
                                         port = '3306',
-                                        database='Solviing_Prices')
+                                        database = 'Solviing_Prices')
     except:
         print('Connection to DB failed.')
 
@@ -112,13 +113,13 @@ def deleteTable(table_name):
 
 def setInitialConfig():
 
-    host_name = 'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
     try:
         connection = mysql.connector.connect(host=host_name,
-                                        user='admin', 
-                                        password='s6I1H=)2.21a',
+                                        user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+                                        password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
                                         port = '3306',
-                                        database='Solviing_Prices')
+                                        database = 'Solviing_Prices')
     except:
         print('Connection to DB failed.')
 
@@ -138,13 +139,13 @@ def setInitialConfig():
 def writeTable(df, table_name):
 
     try:
-        sql_engine = create_engine("mysql+pymysql://{user}:{pw}@database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com/{db}"
-                                    .format(user = 'admin',
-                                            pw = 's6I1H=)2.21a',
+        sql_engine = create_engine("mysql+pymysql://{user}:{pw}@solviing.com/{db}"
+                                    .format(user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin',
+                                            pw = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
                                             port = '3306',
                                             db = 'Solviing_Prices'))
         connection = sql_engine#.raw_connection()
-        df.to_sql(name=table_name, con=connection, if_exists='replace',index = False)
+        df.to_sql(name=table_name, con=connection, if_exists='append',index = False)
 
     except Exception as e:
         print('Writing table failed')
@@ -152,15 +153,35 @@ def writeTable(df, table_name):
     if table_name == 'inputs2':
         setInitialConfig()
 
-def queryProperties():
+def queryOutputs():
 
-    host_name = 'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
     try:
         conn = mysql.connector.connect(host=host_name,
-                                        user='admin', 
-                                        password='s6I1H=)2.21a',
+                                        user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+                                        password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
                                         port = '3306',
-                                        database='Solviing_Prices')
+                                        database = 'Solviing_Prices')
+    except:
+        print('Connection to DB failed.')
+    
+    outputs_df = pd.read_sql_query ('''
+                                SELECT
+                                *
+                                FROM outputs2
+                                ''', conn)
+    outputs_df['colonia'] = outputs_df['colonia'].str.lower()
+    return outputs_df
+
+def queryProperties():
+
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    try:
+        conn = mysql.connector.connect(host=host_name,
+                                        user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+                                        password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
+                                        port = '3306',
+                                        database = 'Solviing_Prices')
     except:
         print('Connection to DB failed.')
     
@@ -175,40 +196,40 @@ def queryProperties():
 
 def queryPriceCatalogue():
 
-    host_name = 'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
     try:
         conn = mysql.connector.connect(host=host_name,
-                                        user='admin', 
-                                        password='s6I1H=)2.21a',
+                                        user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+                                        password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
                                         port = '3306',
-                                        database='Solviing_Prices')
+                                        database = 'Solviing_Prices')
     except:
         print('Connection to DB failed.')
 
     price_cat_df = pd.read_sql_query ('''
                                 SELECT
                                 *
-                                FROM resumen
+                                FROM prices_catalog_v2
                                 ''', conn)
     price_cat_df['colonia'] = price_cat_df['colonia'].str.lower()
     return price_cat_df
 
 def queryRankingCatalogue():
 
-    host_name = 'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
+    host_name = 'solviing.com' #'database-1.caxiwm5xesw7.us-east-2.rds.amazonaws.com'
     try:
         conn = mysql.connector.connect(host=host_name,
-                                        user='admin', 
-                                        password='s6I1H=)2.21a',
+                                        user = '8BGSBCAT41cgtzuEmYfPtmNZo', #'admin', 
+                                        password = '}L[%N=Uk<TCh)OZcA%^:Q9BS/', #'s6I1H=)2.21a',
                                         port = '3306',
-                                        database='Solviing_Prices')
+                                        database = 'Solviing_Prices')
     except:
         print('Connection to DB failed.')
 
     ranking_cat_df = pd.read_sql_query ('''
                                 SELECT
                                 *
-                                FROM ranking_cat
+                                FROM ranking_catalog_v1
                                 ''', conn)
     ranking_cat_df['colonia'] = ranking_cat_df['colonia'].str.lower()
     ranking_cat_df = ranking_cat_df[~(ranking_cat_df['Calificacion_MERCADO'].isna())]

@@ -15,4 +15,5 @@ pymysql
 sqlalchemy
 os
 webbrowser
-threading
+Flask==2.1.1
+Flask-Compress==1.12
