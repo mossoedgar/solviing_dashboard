@@ -182,7 +182,8 @@ def init_callbacks(app, df, options_dict):
                 # split the x-axis to fraction of plots in
                 # proportions  
                 xaxis=dict(
-                        domain=[0.05, 0.95]
+                        domain=[0.05, 0.95],
+			autorange: True
                     ),
             
                 # pass the y-axis title, titlefont, color
@@ -299,7 +300,8 @@ def init_callbacks(app, df, options_dict):
                 # split the x-axis to fraction of plots in
                 # proportions  
                 xaxis=dict(
-                        domain=[0.05, 0.95]
+                        domain=[0.05, 0.95],
+			autorange: True
                     ),
                 # pass the y-axis title, titlefont, color
                 # and tickfont as a dictionary and store
