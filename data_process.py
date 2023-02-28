@@ -22,7 +22,7 @@ def cleanFigureData(df):
 
     df['fecha'] = df['fecha'].astype(str)
     df['fecha'] = [x[:4] + ' ' + x[4:] for x in df['fecha']]
-
+    
     if 'clave_entidad_federativa' in df.columns:
         df = df[~df['clave_entidad_federativa'].isna()]
         df['clave_entidad_federativa'] = df['clave_entidad_federativa'].astype(str)
@@ -36,12 +36,12 @@ def cleanFigureData(df):
         #df = df.loc[df.SUPERFICIE_VENDIBLE.str.isnumeric()]
         df['clave_municipio'] = df['clave_municipio'].astype(int)
     
-    if 'valor_mun_total_promedio' in df.columns:
-        df['valor_mun_total_promedio'] = df['valor_mun_total_promedio'].astype(float)
-        df['valor_mun_total_promedio'] = df['valor_mun_total_promedio'].round(2)
+    if 'valor_total_promedio_mun' in df.columns:
+        df['valor_total_promedio_mun'] = df['valor_total_promedio_mun'].astype(float)
+        df['valor_total_promedio_mun'] = df['valor_total_promedio_mun'].round(2)
 
-    if 'valor_mun_m2_promedio' in df.columns:
-        df['valor_mun_m2_promedio'] = df['valor_mun_m2_promedio'].astype(float)
-        df['valor_mun_m2_promedio'] = df['valor_mun_m2_promedio'].round(2)
+    if 'valor_m2_promedio_mun' in df.columns:
+        df['valor_m2_promedio_mun'] = df['valor_m2_promedio_mun'].astype(float)
+        df['valor_m2_promedio_mun'] = df['valor_m2_promedio_mun'].round(2)
 
     return df
