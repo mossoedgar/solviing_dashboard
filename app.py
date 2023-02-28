@@ -25,7 +25,7 @@ def init_dashboard(server):
     """Create a Plotly Dash dashboard."""
 
     df,options_dict = create_df()
-    df_init = df[df['entidad_federativa'] == "Ciudad de México"]
+    df_init = df[df['entidad_federativa'] == "ciudad de mexico"]
 
     dash_app = dash.Dash(
         name='Dashboard',
@@ -45,7 +45,7 @@ def init_dashboard(server):
                         html.Div([
                             dcc.Dropdown(
                                 list(options_dict.keys()),
-                                'Ciudad de México',
+                                'ciudad de mexico',
                                 id='dropdown-estado'
                             )
                         ], style={'width': '25%', 'display': 'inline-block'}),
@@ -53,7 +53,7 @@ def init_dashboard(server):
                         html.Div([
                             dcc.Dropdown(
                                 df_init['municipio'].unique(),
-				'Benito Juárez',
+                                'benito juarez',
                                 #'Selecciona un Municipio',
                                 id = 'dropdown-municipio'
                                 #options=[
@@ -131,15 +131,15 @@ def init_callbacks(app, df, options_dict):
 
             dff = pd.read_json(dff_filtered, orient='split')
             dff = cleanFigureData(dff)
-            dff['valor_mun_total_promedio_porcentaje'] = (dff['valor_mun_total_promedio'].pct_change())*100
+            dff['valor_mun_total_promedio_porcentaje'] = (dff['valor_total_promedio_mun'].pct_change())*100
             dff['valor_mun_total_promedio_porcentaje'] = dff['valor_mun_total_promedio_porcentaje'].round(2)
             
             fig = go.Figure()
 
             fig.add_trace(go.Bar(
                 x=dff.fecha, 
-                y=dff.valor_mun_total_promedio,
-                text = dff.valor_mun_total_promedio,
+                y=dff.valor_total_promedio_mun,
+                text = dff.valor_total_promedio_mun,
                 textposition = "auto",
                 textfont=dict(
                     family="Helvetica",
@@ -170,7 +170,7 @@ def init_callbacks(app, df, options_dict):
             # fig.update_layout(hovermode='x unified')
             fig.add_trace(go.Scatter(
                 x=dff.fecha, 
-                y=dff.valor_mun_total_promedio,
+                y=dff.valor_total_promedio_mun,
                 mode = 'lines',
                 marker_color='black',
                 hovertemplate="Tendencia V.P. Inmueble ($MXN)<br>Trimestral=%{x}<br>Valor=%{y}<extra></extra>",
@@ -183,7 +183,7 @@ def init_callbacks(app, df, options_dict):
                 # proportions  
                 xaxis=dict(
                         domain=[0.05, 0.95],
-			autorange: True
+                        #autorange: True
                     ),
             
                 # pass the y-axis title, titlefont, color
@@ -249,15 +249,15 @@ def init_callbacks(app, df, options_dict):
 
             dff = pd.read_json(dff_filtered, orient='split')
             dff = cleanFigureData(dff)
-            dff['valor_mun_m2_promedio_porcentaje'] = (dff['valor_mun_m2_promedio'].pct_change())*100
+            dff['valor_mun_m2_promedio_porcentaje'] = (dff['valor_m2_promedio_mun'].pct_change())*100
             dff['valor_mun_m2_promedio_porcentaje'] = dff['valor_mun_m2_promedio_porcentaje'].round(2)
 
             fig = go.Figure()
 
             fig.add_trace(go.Bar(
                 x=dff.fecha, 
-                y=dff.valor_mun_m2_promedio,
-                text = dff.valor_mun_m2_promedio,
+                y=dff.valor_m2_promedio_mun,
+                text = dff.valor_m2_promedio_mun,
                 textposition = "auto",
                 textfont=dict(
                     family="Helvetica",
@@ -287,7 +287,7 @@ def init_callbacks(app, df, options_dict):
 
             fig.add_trace(go.Scatter(
                 x=dff.fecha, 
-                y=dff.valor_mun_m2_promedio,
+                y=dff.valor_m2_promedio_mun,
                 mode = 'lines',
                 marker_color='black',
                 hovertemplate="Tendencia V.P. m2 ($MXN)<br>Trimestral=%{x}<br>Valor=%{y}<extra></extra>",
@@ -301,7 +301,7 @@ def init_callbacks(app, df, options_dict):
                 # proportions  
                 xaxis=dict(
                         domain=[0.05, 0.95],
-			autorange: True
+                        #autorange: True
                     ),
                 # pass the y-axis title, titlefont, color
                 # and tickfont as a dictionary and store
